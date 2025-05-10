@@ -18,55 +18,53 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: 80,
-        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    return Container(
+      height: 80,
+      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
 
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
-          color: Color(0xff003366).withAlpha(200),
-        ),
-        child: Obx(
-          () => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  navbarController.changeMenuIndex(1);
-                },
-                child: MenuItem(
-                  currentIndex: navbarController.currentMenuIndex.value,
-                  menuIndex: 1,
-                  icon: Icons.list_rounded,
-                  title: 'Jadwal',
-                ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Color(0xff003366).withAlpha(200),
+      ),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () {
+                navbarController.changeMenuIndex(0);
+              },
+              child: MenuItem(
+                currentIndex: navbarController.currentMenuIndex.value,
+                menuIndex: 0,
+                icon: Icons.list_rounded,
+                title: 'Jadwal',
               ),
-              GestureDetector(
-                onTap: () {
-                  navbarController.changeMenuIndex(2);
-                },
-                child: MenuItem(
-                  currentIndex: navbarController.currentMenuIndex.value,
-                  menuIndex: 2,
-                  icon: Icons.grade,
-                  title: 'Nilai',
-                ),
+            ),
+            GestureDetector(
+              onTap: () {
+                navbarController.changeMenuIndex(1);
+              },
+              child: MenuItem(
+                currentIndex: navbarController.currentMenuIndex.value,
+                menuIndex: 1,
+                icon: Icons.grade,
+                title: 'Nilai',
               ),
-              GestureDetector(
-                onTap: () {
-                  navbarController.changeMenuIndex(3);
-                },
-                child: MenuItem(
-                  menuIndex: 3,
-                  currentIndex: navbarController.currentMenuIndex.value,
-                  icon: Icons.list_rounded,
-                  title: 'Jadwal',
-                ),
+            ),
+            GestureDetector(
+              onTap: () {
+                navbarController.changeMenuIndex(2);
+              },
+              child: MenuItem(
+                menuIndex: 2,
+                currentIndex: navbarController.currentMenuIndex.value,
+                icon: Icons.list_rounded,
+                title: 'Jadwal',
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
