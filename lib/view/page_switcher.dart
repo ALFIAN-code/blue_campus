@@ -1,10 +1,9 @@
 import 'package:bluecampus_mobile/controller/navbar_controller.dart';
 import 'package:bluecampus_mobile/view/component/navbar.dart';
-import 'package:bluecampus_mobile/view/frs_page.dart';
-import 'package:bluecampus_mobile/view/jadwal_page.dart';
-import 'package:bluecampus_mobile/view/nilai_page.dart';
+import 'package:bluecampus_mobile/view/frs_page/frs_page.dart';
+import 'package:bluecampus_mobile/view/jadwal_page/jadwal_page.dart';
+import 'package:bluecampus_mobile/view/nilai_page/nilai_page_mahasiswa.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 

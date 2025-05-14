@@ -6,10 +6,12 @@ class CustomDropDown extends StatelessWidget {
     required this.value,
     required this.items,
     required this.onChange,
+    this.filledColor = Colors.white,
   });
   String value;
   final List<String> items;
   void Function(String?)? onChange;
+  Color filledColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CustomDropDown extends StatelessWidget {
 
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: filledColor,
         isDense: true,
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         border: OutlineInputBorder(

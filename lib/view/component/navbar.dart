@@ -60,8 +60,8 @@ class _NavbarState extends State<Navbar> {
               child: MenuItem(
                 menuIndex: 2,
                 currentIndex: navbarController.currentMenuIndex.value,
-                icon: Icons.list_rounded,
-                title: 'Jadwal',
+                icon: Icons.list_alt_rounded,
+                title: 'FRS',
               ),
             ),
           ],

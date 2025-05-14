@@ -1,5 +1,3 @@
-import 'package:bluecampus_mobile/view/component/navbar.dart';
-import 'package:bluecampus_mobile/view/jadwal_page.dart';
 import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
