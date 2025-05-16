@@ -1,4 +1,4 @@
-import 'package:bluecampus_mobile/view/page_switcher.dart';
+import 'package:bluecampus_mobile/view/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(home: PageSwitcher());
+    return GetMaterialApp(home: LoginPage());
   }
 }
