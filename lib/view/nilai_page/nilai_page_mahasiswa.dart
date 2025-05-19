@@ -3,7 +3,8 @@ import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
 class NilaiPage extends StatelessWidget {
-  NilaiPage({super.key});
+  final String role;
+  NilaiPage({super.key, required this.role});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';

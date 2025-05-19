@@ -4,7 +4,8 @@ import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
 class FrsPage extends StatelessWidget {
-  FrsPage({super.key});
+  final String role;
+  FrsPage({super.key, required this.role});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';

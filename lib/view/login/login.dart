@@ -1,4 +1,5 @@
 import 'package:bluecampus_mobile/view/jadwal_page/jadwal_page.dart';
+import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
 
@@ -13,29 +14,60 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
+  String error = '';
 
-  Future<void> handleLogin() async {
-    setState(() => isLoading = true);
+  void handleLogin() async {
+    setState(() {
+      isLoading = true;
+      error = '';
+    });
 
-    final response = await AuthService.login(
+    bool success = await AuthService.login(
       emailController.text,
       passwordController.text,
     );
 
-    setState(() => isLoading = false);
+    setState(() {
+      isLoading = false;
+    });
 
-    if (response['success']) {
+    if (success && mounted) {
+      final user = await AuthService.getUser();
+      final role = user?['role'];
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder:
-              (_) => JadwalPage(user: response['user']), // hanya satu screen
-        ),
+        MaterialPageRoute(builder: (_) => PageSwitcher(role: role)),
       );
     } else {
-      showError(response['message']);
+      setState(() {
+        error = 'Login gagal. Cek email/password.';
+      });
     }
   }
+
+  // Future<void> handleLogin() async {
+  //   setState(() => isLoading = true);
+
+  //   final response = await AuthService.login(
+  //     emailController.text,
+  //     passwordController.text,
+  //   );
+
+  //   setState(() => isLoading = false);
+
+  //   if (response['success']) {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder:
+  //             (_) => JadwalPage(user: response['user']),
+  //       ),
+  //     );
+  //   } else {
+  //     showError(response['message']);
+  //   }
+  // }
 
   void showError(String message) {
     ScaffoldMessenger.of(
