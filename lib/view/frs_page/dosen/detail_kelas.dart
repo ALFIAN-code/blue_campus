@@ -1,4 +1,4 @@
-import 'package:bluecampus_mobile/view/frs_page/frs_mahasiswa.dart';
+import 'package:bluecampus_mobile/view/frs_page/dosen/frs_mahasiswa.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class DetailKelas extends StatelessWidget {
                     print('tapped');
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => FrsMahasiswa()),
+                      MaterialPageRoute(builder: (context) => DetailFrs()),
                     );
                   },
                   child: Container(

@@ -2,8 +2,8 @@ import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
-class NilaiPage extends StatelessWidget {
-  NilaiPage({super.key});
+class NilaiPageMahasiswa extends StatelessWidget {
+  NilaiPageMahasiswa({super.key});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';

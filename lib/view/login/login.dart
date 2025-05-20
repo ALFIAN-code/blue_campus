@@ -1,4 +1,6 @@
+import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -92,6 +94,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   //masukan fungsi auth disini
+                  Get.to(PageSwitcher());
                 },
                 child: Text('Login', style: TextStyle(color: Colors.white)),
               ),

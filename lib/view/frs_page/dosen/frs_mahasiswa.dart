@@ -2,14 +2,14 @@ import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
-class FrsMahasiswa extends StatefulWidget {
-  const FrsMahasiswa({super.key});
+class DetailFrs extends StatefulWidget {
+  const DetailFrs({super.key});
 
   @override
-  State<FrsMahasiswa> createState() => _FrsMahasiswaState();
+  State<DetailFrs> createState() => _DetailFrsState();
 }
 
-class _FrsMahasiswaState extends State<FrsMahasiswa> {
+class _DetailFrsState extends State<DetailFrs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,10 +1,10 @@
 import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
-import 'package:bluecampus_mobile/view/frs_page/detail_kelas.dart';
+import 'package:bluecampus_mobile/view/frs_page/dosen/detail_kelas.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
-class FrsPage extends StatelessWidget {
-  FrsPage({super.key});
+class FrsPageDosen extends StatelessWidget {
+  FrsPageDosen({super.key});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';
