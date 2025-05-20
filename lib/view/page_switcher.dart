@@ -18,14 +18,8 @@ class PageSwitcher extends StatelessWidget {
 
   var controller = Get.put(NavbarController());
 
-  // String role = 'Mahasiswa';
-
   @override
   Widget build(BuildContext context) {
-    // if (user == null) {
-    //   return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    // }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(

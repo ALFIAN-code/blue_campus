@@ -1,7 +1,7 @@
-import 'package:bluecampus_mobile/view/jadwal_page/jadwal_page.dart';
 import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -163,7 +163,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   backgroundColor: const Color(0xff003366),
                 ),
-                onPressed: isLoading ? null : handleLogin,
+                onPressed: () {
+                  Get.to(PageSwitcher(role: 'Dosen'));
+                },
                 child:
                     isLoading
                         ? const CircularProgressIndicator(
