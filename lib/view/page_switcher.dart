@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:bluecampus_mobile/controller/navbar_controller.dart';
 import 'package:bluecampus_mobile/view/component/navbar.dart';
 import 'package:bluecampus_mobile/view/frs_page/dosen/frs_page.dart';
@@ -10,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class PageSwitcher extends StatelessWidget {
-  PageSwitcher({super.key});
+class PageSwitcher extends StatefulWidget {
+  const PageSwitcher({super.key, required this.role});
 
   var controller = Get.put(NavbarController());
 
@@ -19,6 +21,10 @@ class PageSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (user == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(

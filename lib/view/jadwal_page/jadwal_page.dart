@@ -3,7 +3,8 @@ import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 
 class JadwalPage extends StatelessWidget {
-  JadwalPage({super.key});
+  final String role;
+  JadwalPage({super.key, required this.role});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';
@@ -19,7 +20,7 @@ class JadwalPage extends StatelessWidget {
             children: [
               SizedBox(height: 20),
               Text(
-                'Jadwal Mata Kuliah',
+                'Jadwal Mata Kuliah ($role)',
                 style: TextStyle(
                   color: textColor,
                   fontSize: 20,
