@@ -3,7 +3,7 @@ class MataKuliahModel {
   final String kodeMatkul;
   final String nama;
   final String jenisMatkul;
-  final String sks;
+  final int sks;
 
   MataKuliahModel({
     required this.id,

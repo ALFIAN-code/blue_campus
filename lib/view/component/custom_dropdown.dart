@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class CustomDropDown extends StatelessWidget {
   CustomDropDown({
     super.key,
-    required this.value,
+    this.value,
     required this.items,
     required this.onChange,
     this.filledColor = Colors.white,
   });
-  String value;
+  String? value;
   final List<String> items;
   void Function(String?)? onChange;
   Color filledColor;
@@ -17,7 +17,6 @@ class CustomDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       value: value,
-
       decoration: InputDecoration(
         filled: true,
         fillColor: filledColor,

@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: const Color(0xff003366),
                 ),
                 onPressed: () {
-                  Get.to(PageSwitcher(role: 'Dosen'));
+                  Get.to(PageSwitcher(role: 'Mahasiswa'));
                 },
                 child:
                     isLoading

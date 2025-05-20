@@ -8,8 +8,7 @@ import 'package:bluecampus_mobile/view/jadwal_page/jadwal_page.dart';
 import 'package:bluecampus_mobile/view/nilai_page/nilai_page_dosen.dart';
 import 'package:bluecampus_mobile/view/nilai_page/nilai_page_mahasiswa.dart';
 import 'package:bluecampus_mobile/view/unidentified_role_page.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:get/get_core/src/get_main.dart';
 
 class PageSwitcher extends StatelessWidget {
@@ -36,7 +35,6 @@ class PageSwitcher extends StatelessWidget {
                         JadwalPage(role: role),
                         NilaiPageMahasiswa(),
                         FrsRoleMahasiswa(),
-                        // FrsPageDosen()
                       ]
                       : (role == "Dosen")
                       ? [
