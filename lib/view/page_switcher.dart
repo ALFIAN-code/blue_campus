@@ -12,18 +12,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class PageSwitcher extends StatefulWidget {
-  const PageSwitcher({super.key, required this.role});
+class PageSwitcher extends StatelessWidget {
+  final String role;
+  PageSwitcher({super.key, required this.role});
 
   var controller = Get.put(NavbarController());
 
-  String role = 'Mahasiswa';
+  // String role = 'Mahasiswa';
 
   @override
   Widget build(BuildContext context) {
-    if (user == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
+    // if (user == null) {
+    //   return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    // }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -38,13 +39,17 @@ class PageSwitcher extends StatefulWidget {
               children:
                   (role == "Mahasiswa")
                       ? [
-                        JadwalPage(),
+                        JadwalPage(role: role),
                         NilaiPageMahasiswa(),
                         FrsRoleMahasiswa(),
                         // FrsPageDosen()
                       ]
                       : (role == "Dosen")
-                      ? [JadwalPage(), NilaiPageDosen(), FrsPageDosen()]
+                      ? [
+                        JadwalPage(role: role),
+                        NilaiPageDosen(),
+                        FrsPageDosen(),
+                      ]
                       : [UnIdentifiedRole()],
             ),
           ),
