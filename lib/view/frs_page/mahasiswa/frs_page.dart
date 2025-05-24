@@ -1,3 +1,4 @@
+import 'package:bluecampus_mobile/Models/dummy_data.dart';
 import 'package:bluecampus_mobile/controller/frs_mahasiswa_controller.dart';
 import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
 import 'package:bluecampus_mobile/view/style.dart';
@@ -12,6 +13,8 @@ class FrsRoleMahasiswa extends StatelessWidget {
 
   var tahunAjaran = '2023/2024';
   var semester = 'Ganjil';
+
+  var selectedMatkul;
 
   @override
   Widget build(BuildContext context) {
@@ -97,16 +100,120 @@ class FrsRoleMahasiswa extends StatelessWidget {
               ),
               SizedBox(height: 20),
               CustomDropDown(
+                value: selectedMatkul,
                 items:
                     listMatkul
                         .map(
                           (e) =>
-                              '${e['kodeMatkul']} ${e['namaMatkul']} - ${e['kelas']}',
+                              '${e['id']} ${e['kodeMatkul']} ${e['namaMatkul']} - ${e['kelas']}',
                         )
                         .toList(),
-                onChange: (value) {},
+                onChange: (value) {
+                  selectedMatkul = value;
+                  print(selectedMatkul);
+                },
               ),
-            ],
+
+              SizedBox(height: 20,),
+              SizedBox(
+                height: 40,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff003366),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    minimumSize: Size(double.infinity, 50),
+                  ),
+                  onPressed:() {
+                    controllerFrsMahasiswa.addSelectedFrs(selectedMatkul!.split(' ')[0]);
+                    controllerFrsMahasiswa.selectedFrs.refresh();
+                    print(controllerFrsMahasiswa.selectedFrs);
+                } , child: Text("Tambah Matkul", style: TextStyle(color: Colors.white),),
+                ),
+              ),
+
+              SizedBox(height: 20),
+              Column(
+                children: [
+                  Obx(
+                    () => controllerFrsMahasiswa.selectedFrs.value.isEmpty
+                        ? Text('Tidak ada mata kuliah yang dipilih')
+                        : ListView.separated(
+                          separatorBuilder: (_, __) => SizedBox(height: 10),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: controllerFrsMahasiswa.selectedFrs.value.length,
+                            itemBuilder: (context, index) {
+                              var frs = controllerFrsMahasiswa.selectedFrs.value[index];
+                              var matakuliah = dummyMataKuliahList.firstWhere(
+                                (element) => element.id == frs.idMatkul,
+                              );
+                              return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${matakuliah.kodeMatkul} ${matakuliah.nama}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Kelas: ${frs.kelas}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Dosen: ${frs.idDosen}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${frs.hari} ${frs.jamMulai} - ${frs.jamSelesai}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'SKS: ${matakuliah.sks}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                  SizedBox(height: 120),
+                ],
+              )
+            ]
           ),
         ),
       ),

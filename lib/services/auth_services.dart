@@ -3,10 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static const baseUrl = 'https://p5lt74tb-8000.asse.devtunnels.ms/';
+  static const baseUrl = 'http://10.0.2.2:8000';
 
   static Future<bool> login(String email, String password) async {
-    final url = Uri.parse('$baseUrl/login');
+    final url = Uri.parse('$baseUrl/api/login');
+    // final url2 = Uri.https('$baseUrl/api/login');
 
     final response = await http.post(
       url,

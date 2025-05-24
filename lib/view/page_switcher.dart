@@ -26,17 +26,17 @@ class PageSwitcher extends StatelessWidget {
           Obx(
             () => IndexedStack(
               index:
-                  (role == "Mahasiswa" || role == "Dosen")
+                  (role == "mahasiswa" || role == "dosen")
                       ? controller.currentMenuIndex.value
                       : controller.unIdentifedIndex.value,
               children:
-                  (role == "Mahasiswa")
+                  (role == "mahasiswa")
                       ? [
                         JadwalPage(role: role),
                         NilaiPageMahasiswa(),
                         FrsRoleMahasiswa(),
                       ]
-                      : (role == "Dosen")
+                      : (role == "dosen")
                       ? [
                         JadwalPage(role: role),
                         NilaiPageDosen(),

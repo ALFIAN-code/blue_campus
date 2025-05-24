@@ -34,10 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (success && mounted) {
       final user = await AuthService.getUser();
       final role = user?['role'];
+      print(role);
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => PageSwitcher(role: role)),
+        MaterialPageRoute(builder: (_) => PageSwitcher(role: role.toString().toLowerCase())),
       );
     } else {
       setState(() {
@@ -164,7 +165,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: const Color(0xff003366),
                 ),
                 onPressed: () {
-                  Get.to(PageSwitcher(role: 'Mahasiswa'));
+                  // Get.to(PageSwitcher(role: 'Mahasiswa'));
+                  handleLogin();
                 },
                 child:
                     isLoading

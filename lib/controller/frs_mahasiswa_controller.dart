@@ -1,6 +1,7 @@
 import 'package:bluecampus_mobile/Models/dummy_data.dart';
 import 'package:bluecampus_mobile/Models/frs_model.dart';
 import 'package:bluecampus_mobile/Models/paket_frs_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FrsMahasiswaController extends GetxController {
@@ -84,7 +85,7 @@ class FrsMahasiswaController extends GetxController {
         (element) => element.id == frs.idMatkul,
       );
       kumpulanFrs.add({
-        'idMatkul': matakuliah.id,
+        'id': frs.id,
         'kodeMatkul': matakuliah.kodeMatkul,
         'namaMatkul': matakuliah.nama,
         'kelas': frs.kelas,
@@ -93,7 +94,21 @@ class FrsMahasiswaController extends GetxController {
     return kumpulanFrs;
   }
 
-  void addSelectedFrd(String id) {
-    // selectedFrs.value.add(frs);
+  void addSelectedFrs(String id) {
+    if (!selectedFrs.value.contains(
+      dummyFrsList.firstWhere((element) => element.id == id),
+    )) {
+      selectedFrs.value.add(
+        dummyFrsList.firstWhere((element) => element.id == id),
+      );
+    } else {
+      Get.snackbar(
+        'Error',
+        'Mata kuliah sudah ada di dalam daftar',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 }
