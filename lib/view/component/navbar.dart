@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bluecampus_mobile/controller/navbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,52 +22,71 @@ class _NavbarState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Color(0xff003366).withAlpha(200),
-      ),
-      child: Obx(
-        () => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              onTap: () {
-                navbarController.changeMenuIndex(0);
-              },
-              child: MenuItem(
-                currentIndex: navbarController.currentMenuIndex.value,
-                menuIndex: 0,
-                icon: Icons.list_rounded,
-                title: 'Jadwal',
+      clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+            ),
+      child: Stack(
+        children: [
+          BackdropFilter(filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), child: Container(),),
+          Container(
+            height: 80,
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+            
+          
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xff003366).withAlpha(200),
+                  Color(0xff003366).withAlpha(150),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                navbarController.changeMenuIndex(1);
-              },
-              child: MenuItem(
-                currentIndex: navbarController.currentMenuIndex.value,
-                menuIndex: 1,
-                icon: Icons.grade,
-                title: 'Nilai',
+            child: Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      navbarController.changeMenuIndex(0);
+                    },
+                    child: MenuItem(
+                      currentIndex: navbarController.currentMenuIndex.value,
+                      menuIndex: 0,
+                      icon: Icons.list_rounded,
+                      title: 'Jadwal',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      navbarController.changeMenuIndex(1);
+                    },
+                    child: MenuItem(
+                      currentIndex: navbarController.currentMenuIndex.value,
+                      menuIndex: 1,
+                      icon: Icons.grade,
+                      title: 'Nilai',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      navbarController.changeMenuIndex(2);
+                    },
+                    child: MenuItem(
+                      menuIndex: 2,
+                      currentIndex: navbarController.currentMenuIndex.value,
+                      icon: Icons.list_alt_rounded,
+                      title: 'FRS',
+                    ),
+                  ),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                navbarController.changeMenuIndex(2);
-              },
-              child: MenuItem(
-                menuIndex: 2,
-                currentIndex: navbarController.currentMenuIndex.value,
-                icon: Icons.list_alt_rounded,
-                title: 'FRS',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

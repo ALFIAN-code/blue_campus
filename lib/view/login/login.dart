@@ -1,7 +1,6 @@
 import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
-import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

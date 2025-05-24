@@ -1,12 +1,16 @@
+import 'package:bluecampus_mobile/controller/nilai_mahasiswa_controller.dart';
 import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NilaiPageMahasiswa extends StatelessWidget {
   NilaiPageMahasiswa({super.key});
 
   var tahunAjaran = '2024/2025';
   var semester = 'Ganjil';
+
+  var controller = Get.put(NilaiMahasiswaController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,10 @@ class NilaiPageMahasiswa extends StatelessWidget {
                         SizedBox(height: 5),
                         CustomDropDown(
                           items: ['2023/2024', '2024/2025'],
-                          onChange: (value) {},
+                          onChange: (value) {
+                            tahunAjaran = value!;
+                            controller.nilai.refresh();
+                          },
                           value: tahunAjaran,
                         ),
                       ],
@@ -59,7 +66,10 @@ class NilaiPageMahasiswa extends StatelessWidget {
                         SizedBox(height: 5),
                         CustomDropDown(
                           items: ['Ganjil', 'Genap'],
-                          onChange: (value) {},
+                          onChange: (value) {
+                            semester = value!;
+                            controller.nilai.refresh();
+                          },
                           value: semester,
                         ),
                       ],
@@ -77,35 +87,48 @@ class NilaiPageMahasiswa extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.grey),
+              Obx(() {
+                var filteredData = controller
+                    .filterNilaiByTahunAjaranDanJenisSemester(
+                      list: controller.nilai.value.data,
+                      tahunAjaran: tahunAjaran,
+                      jenisSemester: semester,
+                    );
+                return Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: ListView.separated(
+                      itemCount: filteredData.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      separatorBuilder:
+                          (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Divider(),
+                          ),
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: Text(filteredData[index].mataKuliah ?? 'N/A',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ),
+                            SizedBox(width: 20),
+                            Text(filteredData[index].nilaiHuruf ?? '-', style: TextStyle(color: Colors.green)),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                  child: ListView.separated(
-                    itemCount: 10,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    separatorBuilder:
-                        (context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Divider(),
-                        ),
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Expanded(child: Text('Workshop Pengalaman Pengguna')),
-                          SizedBox(width: 20),
-                          Text("A+", style: TextStyle(color: Colors.green)),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ),

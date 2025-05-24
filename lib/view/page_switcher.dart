@@ -46,7 +46,11 @@ class PageSwitcher extends StatelessWidget {
             ),
           ),
           const SafeArea(
-            child: Align(alignment: Alignment.bottomCenter, child: Navbar()),
+            child: Align(alignment: Alignment.bottomCenter, child: Padding(
+              
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Navbar(),
+            )),
           ),
         ],
       ),

@@ -33,9 +33,10 @@ class AuthService {
     }
   }
 
-  static Future<void> logout() async {
+  static Future<bool> logout() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+    var success = false;
 
     if (token != null) {
       final url = Uri.parse('$baseUrl/logout');
@@ -51,10 +52,14 @@ class AuthService {
       if (response.statusCode != 200) {
         print('Logout failed: ${response.statusCode}');
         print('Response body: ${response.body}');
+        success = false;
+      } else {
+        print('Logout successful');
+        success = true;
       }
     }
-
     await prefs.clear();
+    return success;
   }
 
   static Future<Map<String, dynamic>?> getUser() async {

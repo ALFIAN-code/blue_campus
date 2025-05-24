@@ -1,27 +1,67 @@
 class NilaiModel {
-  final String id;
-  final String nilaiAngka;
-  final String nilaiHuruf;
-  final String idFrsMahasiswa;
+  String? status;
+  String? message;
+  List<NilaiItem>? data;
 
-  NilaiModel({
-    required this.id,
-    required this.nilaiAngka,
-    required this.nilaiHuruf,
-    required this.idFrsMahasiswa,
+  NilaiModel({this.status, this.message, this.data});
+
+  factory NilaiModel.fromJson(Map<String, dynamic> json) {
+    return NilaiModel(
+      status: json['status'],
+      message: json['message'],
+      data:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => NilaiItem.fromJson(e))
+              .toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'status': status,
+      'message': message,
+      'data': data?.map((e) => e.toJson()).toList(),
+    };
+  }
+}
+
+class NilaiItem {
+  String? mataKuliah;
+  String? kodeMatkul;
+  String? nilaiHuruf;
+  int? semester;
+  String? tahunAjaran;
+
+  NilaiItem({
+    this.mataKuliah,
+    this.kodeMatkul,
+    this.nilaiHuruf,
+    this.semester,
+    this.tahunAjaran,
   });
 
-  factory NilaiModel.fromJson(Map<String, dynamic> json) => NilaiModel(
-    id: json['id'],
-    nilaiAngka: json['nilai_angka'],
-    nilaiHuruf: json['nilai_huruf'],
-    idFrsMahasiswa: json['id_frs_mahasiswa'],
-  );
+  factory NilaiItem.fromJson(Map<String, dynamic> json) {
+    return NilaiItem(
+      mataKuliah: json['mata_kuliah'] ?? 'null',
+      kodeMatkul: json['kode_matkul'] ?? 'null',
+      nilaiHuruf: json['nilai_huruf'] ?? 'null',
+      semester: json['semester'] ?? 0,
+      tahunAjaran: json['tahun_ajaran'] ?? 'null',
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'nilai_angka': nilaiAngka,
-    'nilai_huruf': nilaiHuruf,
-    'id_frs_mahasiswa': idFrsMahasiswa,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      'mata_kuliah': mataKuliah,
+      'kode_matkul': kodeMatkul,
+      'nilai_huruf': nilaiHuruf,
+      'semester': semester,
+      'tahun_ajaran': tahunAjaran,
+    };
+  }
+
+  @override
+  String toString() {
+    return '[$tahunAjaran | Semester $semester] $mataKuliah ($kodeMatkul) = $nilaiHuruf';
+  }
 }
