@@ -1,0 +1,129 @@
+import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
+import 'package:bluecampus_mobile/view/frs_page/dosen/detail_kelas.dart';
+import 'package:bluecampus_mobile/view/nilai_page/dosen/detail_kelas.dart';
+import 'package:bluecampus_mobile/view/style.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class NilaiPageDosen extends StatefulWidget {
+  NilaiPageDosen({super.key});
+
+  @override
+  State<NilaiPageDosen> createState() => _NilaiPageDosenState();
+}
+
+class _NilaiPageDosenState extends State<NilaiPageDosen> {
+  var tahunAjaran = '2023/2024';
+
+  var semester = 'Ganjil';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffF7F9FC),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            SizedBox(height: 20),
+            Text(
+              'Input Nilai',
+              style: TextStyle(
+                color: textColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Tahun ajaran',
+                        style: TextStyle(color: textColor, fontSize: 16),
+                      ),
+                      SizedBox(height: 5),
+                      CustomDropDown(
+                        items: ['2023/2024', '2024/2025'],
+                        onChange: (value) {
+                          setState(() {
+                            tahunAjaran = value!;
+                          });
+                        },
+                        value: tahunAjaran,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Semester',
+                        style: TextStyle(color: textColor, fontSize: 16),
+                      ),
+                      SizedBox(height: 5),
+                      CustomDropDown(
+                        items: ['Ganjil', 'Genap'],
+                        onChange: (value) {
+                          setState(() {
+                            semester = value!;
+                          });
+                        },
+                        value: semester,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Text('Daftar Kelas',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                )),
+            SizedBox(height: 20),
+            ListView.builder(
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    
+                  ),
+                  child: ListTile(
+                    
+                    title: Text('2 D3 IT B'),
+                    subtitle: Text('Pemrograman Dasar'),
+                    trailing: Icon(Icons.arrow_forward),
+                    onTap: () {
+                      // Navigate to input nilai page
+                      Get.to(() => NilaiKelas(
+                          ));
+                    },
+                  ),
+                );
+              },
+              itemCount: 10,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+            ),
+            SizedBox(height: 120),
+          ],
+        ),
+      ),
+    );
+  }
+}

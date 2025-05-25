@@ -19,15 +19,11 @@ class NilaiMahasiswaController extends GetxController {
       // Replace this with your actual service call
       var fetchedNilai = await NilaiMahasiswaServices.getNilaiMahasiswa();
 
-      if (fetchedNilai != null) {
-        print(
-          'Nilai fetched successfully: ${nilai.value.data?[0].toString()} items',
-        );
-        nilai.value = fetchedNilai;
-      } else {
-        print('No nilai data found');
-      }
-    } catch (e) {
+      print(
+        'Nilai fetched successfully: ${nilai.value.data?[0].toString()} items',
+      );
+      nilai.value = fetchedNilai;
+        } catch (e) {
       print('Error fetching nilai: $e');
     } finally {
       isLoading.value = false;
