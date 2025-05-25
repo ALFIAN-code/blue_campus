@@ -1,6 +1,8 @@
 import 'package:bluecampus_mobile/view/page_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/instance_manager.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       setState(() {
         error = 'Login gagal. Cek email/password.';
+        showError(error);
       });
     }
   }

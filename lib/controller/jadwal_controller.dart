@@ -13,7 +13,6 @@ class JadwalController extends GetxController {
     jadwal.value = JadwalModel(); // Reset jadwal to empty model
     try {
       jadwal.value = await JadwalServices.getJadwal(role);
-      print('Jadwal fetched successfully: ${jadwal.value.data!.jumat?.length} items');
     } catch (e) {
       print('Error fetching jadwal: $e');
     } finally {
