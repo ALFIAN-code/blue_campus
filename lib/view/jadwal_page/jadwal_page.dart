@@ -1,4 +1,4 @@
-import 'package:bluecampus_mobile/controller/jadwal_controller.dart';
+import 'package:bluecampus_mobile/controller/jadwal/jadwal_controller.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
 import 'package:bluecampus_mobile/view/component/custom_dropdown.dart';
 import 'package:bluecampus_mobile/view/login/login.dart';
@@ -71,14 +71,6 @@ class _JadwalPageState extends State<JadwalPage> {
                                 TextButton(
                                   onPressed: () async {
                                     Get.offAll(LoginScreen());
-                                    // var logout = await AuthService.logout();
-                                    // if(logout) {
-                                    //   Get.offAll(() => LoginScreen());
-                                    // } else {
-                                    //   ScaffoldMessenger.of(context).showSnackBar(
-                                    //     SnackBar(content: Text('Logout gagal')),
-                                    //   );
-                                    // }
                                   },
                                   child: Text('Ya'),
                                 ),

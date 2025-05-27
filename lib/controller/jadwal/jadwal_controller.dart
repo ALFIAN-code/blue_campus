@@ -1,4 +1,4 @@
-import 'package:bluecampus_mobile/Models/jadwal_model.dart';
+import 'package:bluecampus_mobile/Models/jadwal/jadwal_model.dart';
 import 'package:bluecampus_mobile/services/jadwal_services.dart';
 import 'package:get/get.dart';
 
