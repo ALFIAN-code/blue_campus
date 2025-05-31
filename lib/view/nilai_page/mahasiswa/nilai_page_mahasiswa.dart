@@ -79,7 +79,7 @@ class NilaiPageMahasiswa extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'Jadwal',
+                'Nilai',
                 style: TextStyle(
                   color: textColor,
                   fontSize: 16,
@@ -94,6 +94,14 @@ class NilaiPageMahasiswa extends StatelessWidget {
                       tahunAjaran: tahunAjaran,
                       jenisSemester: semester,
                     );
+                if(filteredData.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'Tidak ada data nilai untuk tahun ajaran $tahunAjaran dan semester $semester',
+                      style: TextStyle(color: textColor, fontSize: 16),
+                    ),
+                  );
+                }
                 return Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

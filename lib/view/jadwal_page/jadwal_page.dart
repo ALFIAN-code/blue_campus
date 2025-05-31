@@ -5,6 +5,7 @@ import 'package:bluecampus_mobile/view/login/login.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class JadwalPage extends StatefulWidget {
   final String role;
@@ -70,6 +71,9 @@ class _JadwalPageState extends State<JadwalPage> {
                                 ),
                                 TextButton(
                                   onPressed: () async {
+                                    final prefs =
+                                        await SharedPreferences.getInstance();
+                                    await prefs.clear();
                                     Get.offAll(LoginScreen());
                                   },
                                   child: Text('Ya'),
@@ -84,7 +88,7 @@ class _JadwalPageState extends State<JadwalPage> {
                   ],
                 ),
                 SizedBox(height: 10),
-            
+
                 Row(
                   children: [
                     Expanded(
@@ -162,7 +166,8 @@ class _JadwalPageState extends State<JadwalPage> {
                       return Center(child: CircularProgressIndicator());
                     }
                     return ListView.separated(
-                      separatorBuilder: (context, index) => SizedBox(height: 10),
+                      separatorBuilder:
+                          (context, index) => SizedBox(height: 10),
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: hariList.length,
@@ -172,7 +177,9 @@ class _JadwalPageState extends State<JadwalPage> {
                               list: filteredData,
                               hari: hariList[index],
                             );
-                            print('Filtered data for ${hariList[index]}: ${filteredDataByHari.length}');
+                        print(
+                          'Filtered data for ${hariList[index]}: ${filteredDataByHari.length}',
+                        );
                         return Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 20,
@@ -188,10 +195,12 @@ class _JadwalPageState extends State<JadwalPage> {
                             children: [
                               Text(hariList[index]),
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                ),
                                 child: Divider(),
                               ),
-            
+
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children:
@@ -201,8 +210,7 @@ class _JadwalPageState extends State<JadwalPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            item.mataKuliah ??
-                                                'Matkul $index',
+                                            item.mataKuliah ?? 'Matkul $index',
                                             style: TextStyle(
                                               fontWeight: FontWeight.w700,
                                             ),

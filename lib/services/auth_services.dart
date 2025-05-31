@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-
-
   static Future<bool> login(String email, String password) async {
     final url = Uri.parse('$baseUrl/api/login');
 
@@ -33,34 +31,10 @@ class AuthService {
     }
   }
 
-  static Future<bool> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
-    var success = false;
-
-    if (token != null) {
-      final url = Uri.parse('$baseUrl/logout');
-
-      final response = await http.post(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Accept': 'application/json',
-        },
-      );
-
-      if (response.statusCode != 200) {
-        print('Logout failed: ${response.statusCode}');
-        print('Response body: ${response.body}');
-        success = false;
-      } else {
-        print('Logout successful');
-        success = true;
-      }
-    }
-    await prefs.clear();
-    return success;
-  }
+  // static Future<bool> logout() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.clear();
+  // }
 
   static Future<Map<String, dynamic>?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
