@@ -1,9 +1,30 @@
+import 'package:bluecampus_mobile/controller/FRS/detail_kelas_dosen.dart';
+import 'package:bluecampus_mobile/controller/nilai/detail_kelas_controller.dart';
 import 'package:bluecampus_mobile/view/frs_page/dosen/frs_mahasiswa.dart';
 import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class DetailKelas extends StatelessWidget {
-  const DetailKelas({super.key});
+class DetailKelas extends StatefulWidget {
+  const DetailKelas({super.key, required this.idKelas, required this.kelas});
+
+  final int idKelas;
+  final String? kelas;
+  @override
+  State<DetailKelas> createState() => _DetailKelasState();
+}
+
+class _DetailKelasState extends State<DetailKelas> {
+  // Example ID, replace with actual ID if needed
+
+  var controller = Get.put(DetailKelasDosenFrs());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    controller.getDetailKelasDosen(widget.idKelas);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +56,7 @@ class DetailKelas extends StatelessWidget {
               ),
             ),
             Text(
-              'kelas : 2 D3 IT B',
+              'kelas : ${widget.kelas}',
               style: TextStyle(
                 color: textColor,
                 fontSize: 16,
@@ -43,36 +64,53 @@ class DetailKelas extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Column(
-              children: List.generate(
-                3,
-                (index) => GestureDetector(
-                  onTap: () {
-                    print('tapped');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DetailFrs()),
-                    );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey.withAlpha(200),
-                        width: 1,
-                      ),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListTile(
-                      title: Text('Bagus Alfian'),
-                      subtitle: Text('3123500031'),
-                      trailing: Icon(Icons.arrow_forward_ios),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            Obx(() {
+              if (controller.listMahasiswa.value.data == null) {
+                return Center(child: CircularProgressIndicator());
+              } else if (controller.listMahasiswa.value.data!.isEmpty) {
+                return Center(
+                  child: Text('Tidak ada mahasiswa dalam kelas ini'),
+                );
+              } else {
+                return Column(
+                  children:
+                      controller.listMahasiswa.value.data!.map((e) {
+                        return GestureDetector(
+                          onTap: () {
+                            print('tapped');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => DetailFrs(
+                                      idMahasiswa: e.id ?? 0,
+                                      namaMahasiswa: e.nama ?? '-',
+                                      nrp: e.nrp ?? '',
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey.withAlpha(200),
+                                width: 1,
+                              ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              title: Text('${e.nama}'),
+                              subtitle: Text('${e.nrp}'),
+                              trailing: Icon(Icons.arrow_forward_ios),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                );
+              }
+            }),
           ],
         ),
       ),

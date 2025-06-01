@@ -1,4 +1,4 @@
-import 'package:bluecampus_mobile/Models/nilai_model.dart';
+import 'package:bluecampus_mobile/Models/nilai/nilai_model.dart';
 import 'package:bluecampus_mobile/services/nilai_mahasiswa_services.dart';
 import 'package:get/get.dart';
 

@@ -21,7 +21,7 @@ class NilaiKelas extends StatefulWidget {
 class _NilaiKelasState extends State<NilaiKelas> {
   
 
-  final controller = Get.put(DetailKelasController());
+  final controller = Get.put(DetailNilaiKelasController());
   @override
   void initState() {
     super.initState();

@@ -41,8 +41,8 @@ class FrsMahasiswa extends GetxController {
     }
   }
 
-  List<Frs> filterFrsByJenisSemester({
-    required List<Frs>? list,
+  List<FrsMahasiswaItem> filterFrsByJenisSemester({
+    required List<FrsMahasiswaItem>? list,
     required String tahunAjaran,
     required String jenisSemester, // "Ganjil" atau "Genap"
   }) {

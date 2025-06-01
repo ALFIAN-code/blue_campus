@@ -3,7 +3,7 @@ import 'package:bluecampus_mobile/services/nilai_dosen_services.dart';
 import 'package:bluecampus_mobile/view/frs_page/dosen/detail_kelas.dart';
 import 'package:get/get.dart';
 
-class DetailKelasController extends GetxController {
+class DetailNilaiKelasController extends GetxController {
   var isLoading = false.obs;
 
   var listMahasiwa = DetailKelasModel().obs;

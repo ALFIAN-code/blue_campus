@@ -1,33 +1,33 @@
-class FrsMahasiswaModel {
+class FrsDetailMahasiswa {
   String? status;
   String? message;
-  List<FrsMahasiswaItem>? listFrs;
+  List<FrsItem>? data;
 
-  FrsMahasiswaModel({this.status, this.message, this.listFrs});
+  FrsDetailMahasiswa({this.status, this.message, this.data});
 
-  FrsMahasiswaModel.fromJson(Map<String, dynamic> json) {
+  FrsDetailMahasiswa.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      listFrs = <FrsMahasiswaItem>[];
+      data = <FrsItem>[];
       json['data'].forEach((v) {
-        listFrs!.add(FrsMahasiswaItem.fromJson(v));
+        data!.add(FrsItem.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] =status;
-    data['message'] =message;
-    if (this.listFrs != null) {
-      data['data'] = listFrs!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = status;
+    data['message'] = message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class FrsMahasiswaItem {
+class FrsItem {
   int? id;
   String? mataKuliah;
   String? kodeMatkul;
@@ -35,7 +35,7 @@ class FrsMahasiswaItem {
   String? tahunAjaran;
   String? statusDisetujui;
 
-  FrsMahasiswaItem(
+  FrsItem(
       {this.id,
       this.mataKuliah,
       this.kodeMatkul,
@@ -43,7 +43,7 @@ class FrsMahasiswaItem {
       this.tahunAjaran,
       this.statusDisetujui});
 
-  FrsMahasiswaItem.fromJson(Map<String, dynamic> json) {
+  FrsItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     mataKuliah = json['mata_kuliah'];
     kodeMatkul = json['kode_matkul'];
@@ -53,7 +53,7 @@ class FrsMahasiswaItem {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = id;
     data['mata_kuliah'] = mataKuliah;
     data['kode_matkul'] = kodeMatkul;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bluecampus_mobile/Models/nilai_model.dart';
+import 'package:bluecampus_mobile/Models/nilai/nilai_model.dart';
 import 'package:bluecampus_mobile/base_url.dart';
 import 'package:bluecampus_mobile/services/auth_services.dart';
 import 'package:http/http.dart' as http;
