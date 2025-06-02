@@ -73,9 +73,12 @@ class FrsServices {
     }
   }
 
-  static Future<FrsKelasDosen> getListKelasDosen() async {
+
+  // dosen .......
+
+  static Future<FrsKelasDosen> getListKelasDosen({required String tahunAjaran,required String semester}) async {
     var token = await AuthService.getToken();
-    final url = Uri.parse('$baseUrl/api/dosen/frs/kelas');
+    final url = Uri.parse('$baseUrl/api/dosen/frs/kelas?tahun_ajaran=$tahunAjaran&semester=$semester');
     final response = await http.get(
       url,
       headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},
@@ -92,9 +95,9 @@ class FrsServices {
     }
   }
 
-  static Future<FrsDetailKelas> getDetailKelasFrs(int id) async {
+  static Future<FrsDetailKelas> getDetailKelasFrs(int id, {required String tahunAjaran,required String semester}) async {
     var token = await AuthService.getToken();
-    final url = Uri.parse('$baseUrl/api/dosen/frs/kelas/$id/mahasiswa');
+    final url = Uri.parse('$baseUrl/api/dosen/frs/kelas/$id/mahasiswa?tahun_ajaran=$tahunAjaran&semester=$semester');
     final response = await http.get(
       url,
       headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},
@@ -111,9 +114,9 @@ class FrsServices {
     }
   }
 
-  static Future<FrsDetailMahasiswa> getDetailMahasiswa(int id) async {
+  static Future<FrsDetailMahasiswa> getDetailMahasiswa(int id, {required String tahunAjaran,required String semester}) async {
     var token = await AuthService.getToken();
-    final url = Uri.parse('$baseUrl/api/dosen/frs/mahasiswa/$id/list');
+    final url = Uri.parse('$baseUrl/api/dosen/frs/mahasiswa/$id/list?tahun_ajaran=$tahunAjaran&semester=$semester');
     final response = await http.get(
       url,
       headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},

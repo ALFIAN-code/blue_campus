@@ -5,20 +5,36 @@ import 'package:bluecampus_mobile/view/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FrsPageDosen extends StatelessWidget {
+class FrsPageDosen extends StatefulWidget {
   FrsPageDosen({super.key});
 
+  @override
+  State<FrsPageDosen> createState() => _FrsPageDosenState();
+}
+
+class _FrsPageDosenState extends State<FrsPageDosen> {
   var tahunAjaran = '2024/2025';
+
   var semester = 'Ganjil';
 
   var controller = Get.put(KelasFrsControllerFrs());
+
+  @override
+  void initState() {
+    controller.getListKelasDosen(semester: semester, tahunAjaran: tahunAjaran);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF7F9FC),
       body: RefreshIndicator(
-        onRefresh: () => controller.getListKelasDosen(),
+        onRefresh:
+            () => controller.getListKelasDosen(
+              semester: semester,
+              tahunAjaran: tahunAjaran,
+            ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
@@ -33,7 +49,7 @@ class FrsPageDosen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-        
+
               Row(
                 children: [
                   Expanded(
@@ -47,7 +63,15 @@ class FrsPageDosen extends StatelessWidget {
                         SizedBox(height: 5),
                         CustomDropDown(
                           items: ['2023/2024', '2024/2025'],
-                          onChange: (value) {},
+                          onChange: (value) {
+                            setState(() {
+                              tahunAjaran = value!;
+                            });
+                            controller.getListKelasDosen(
+                              semester: semester,
+                              tahunAjaran: tahunAjaran,
+                            );
+                          },
                           value: tahunAjaran,
                         ),
                       ],
@@ -65,7 +89,15 @@ class FrsPageDosen extends StatelessWidget {
                         SizedBox(height: 5),
                         CustomDropDown(
                           items: ['Ganjil', 'Genap'],
-                          onChange: (value) {},
+                          onChange: (value) {
+                            setState(() {
+                              semester = value!;
+                            });
+                            controller.getListKelasDosen(
+                              semester: semester,
+                              tahunAjaran: tahunAjaran,
+                            );
+                          },
                           value: semester,
                         ),
                       ],
@@ -73,7 +105,7 @@ class FrsPageDosen extends StatelessWidget {
                   ),
                 ],
               ),
-        
+
               SizedBox(height: 20),
               Text(
                 'Daftar Kelas',
@@ -96,13 +128,16 @@ class FrsPageDosen extends StatelessWidget {
                             .map(
                               (e) => GestureDetector(
                                 onTap: () {
-                                  print('tapped');
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) =>
-                                              DetailKelas(idKelas: e.id ?? 0, kelas: e.namaKelas,),
+                                          (context) => DetailKelas(
+                                            idKelas: e.id ?? 0,
+                                            kelas: e.namaKelas,
+                                            tahunAjaran: tahunAjaran,
+                                            semester: semester,
+                                          ),
                                     ),
                                   );
                                 },

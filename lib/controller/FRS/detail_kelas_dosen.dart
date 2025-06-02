@@ -9,9 +9,9 @@ class DetailKelasDosenFrs extends GetxController {
   
 var listMahasiswa = FrsDetailKelas().obs;
 
-  Future<void> getDetailKelasDosen(int id) async {
+  Future<void> getDetailKelasDosen({required int id, required String tahunAjaran, required String semester}) async {
     try {
-      listMahasiswa.value = await FrsServices.getDetailKelasFrs(id);
+      listMahasiswa.value = await FrsServices.getDetailKelasFrs(id, tahunAjaran: tahunAjaran, semester: semester);
     } catch (e) {
       throw Exception('Failed to load Detail Kelas Dosen data: $e');
     }

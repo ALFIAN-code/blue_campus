@@ -6,18 +6,18 @@ import 'package:get/get.dart';
 class DetailMahasiswaFrs extends GetxController {
   var listFrs = FrsDetailMahasiswa().obs;
 
-  Future<void> getDetailMahasiswa(int id) async {
+  Future<void> getDetailMahasiswa({required int id,required String semester, required String tahunAjaran}) async {
     try {
-      listFrs.value = await FrsServices.getDetailMahasiswa(id);
+      listFrs.value = await FrsServices.getDetailMahasiswa(id, semester: semester, tahunAjaran: tahunAjaran);
     } catch (e) {
       throw Exception('Failed to load Detail Mahasiswa data: $e');
     }
   }
 
-  Future<void> updateStatusFrs({required int idMahasiswa,required String status,required int idFrs}) async {
+  Future<void> updateStatusFrs({required int idMahasiswa, required String status, required int idFrs, required String semester, required String tahunAjaran}) async {
     try {
       await FrsServices.updateFrsMahasiswa(idFrs: idFrs, idMahasiswa: idMahasiswa, status: status);
-      await getDetailMahasiswa(idMahasiswa);
+      await getDetailMahasiswa(id: idMahasiswa, semester: semester, tahunAjaran: tahunAjaran);
       Get.snackbar(
         'Berhasil',
         'Status FRS berhasil diperbarui',

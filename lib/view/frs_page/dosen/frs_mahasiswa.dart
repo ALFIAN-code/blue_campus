@@ -10,11 +10,16 @@ class DetailFrs extends StatefulWidget {
     required this.idMahasiswa,
     required this.namaMahasiswa,
     required this.nrp,
+    required this.semester,
+    required this.tahunAjaran,
   });
 
   final int idMahasiswa;
   final String namaMahasiswa;
   final String nrp;
+
+  final String semester;
+  final String tahunAjaran;
 
   @override
   State<DetailFrs> createState() => _DetailFrsState();
@@ -25,7 +30,7 @@ class _DetailFrsState extends State<DetailFrs> {
 
   @override
   void initState() {
-    controller.getDetailMahasiswa(widget.idMahasiswa);
+    controller.getDetailMahasiswa(id: widget.idMahasiswa, semester: widget.semester, tahunAjaran: widget.tahunAjaran);
     super.initState();
   }
 
@@ -44,7 +49,7 @@ class _DetailFrsState extends State<DetailFrs> {
 
         return RefreshIndicator(
           onRefresh: () async {
-            await controller.getDetailMahasiswa(widget.idMahasiswa);
+            await controller.getDetailMahasiswa(id: widget.idMahasiswa, semester: widget.semester, tahunAjaran: widget.tahunAjaran);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -117,6 +122,8 @@ class _DetailFrsState extends State<DetailFrs> {
                                       idFrs: e.id!,
                                       status: value!,
                                       idMahasiswa: widget.idMahasiswa,
+                                      semester: widget.semester,
+                                      tahunAjaran: widget.tahunAjaran,
                                     );
                                   });
                                 },

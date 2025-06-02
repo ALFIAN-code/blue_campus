@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailKelas extends StatefulWidget {
-  const DetailKelas({super.key, required this.idKelas, required this.kelas});
+  const DetailKelas({super.key, required this.idKelas, required this.kelas, required this.tahunAjaran, required this.semester});
 
   final int idKelas;
   final String? kelas;
+
+  final String tahunAjaran;
+  final String semester;
+
   @override
   State<DetailKelas> createState() => _DetailKelasState();
 }
@@ -22,7 +26,7 @@ class _DetailKelasState extends State<DetailKelas> {
   @override
   void initState() {
     // TODO: implement initState
-    controller.getDetailKelasDosen(widget.idKelas);
+    controller.getDetailKelasDosen(id: widget.idKelas, tahunAjaran: widget.tahunAjaran, semester: widget.semester);
     super.initState();
   }
 
@@ -44,7 +48,7 @@ class _DetailKelasState extends State<DetailKelas> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await controller.getDetailKelasDosen(widget.idKelas);
+          await controller.getDetailKelasDosen(id: widget.idKelas, tahunAjaran: widget.tahunAjaran, semester: widget.semester);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -90,6 +94,8 @@ class _DetailKelasState extends State<DetailKelas> {
                                         idMahasiswa: e.id ?? 0,
                                         namaMahasiswa: e.nama ?? '-',
                                         nrp: e.nrp ?? '',
+                                        semester: widget.semester,
+                                        tahunAjaran: widget.tahunAjaran,
                                       ),
                                 ),
                               );
