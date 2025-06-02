@@ -83,7 +83,8 @@ class _NilaiKelasState extends State<NilaiKelas> {
                   controller.listMahasiwa.value.data?.length ?? 0,
                   (index) => GestureDetector(
                     onTap: () {
-                      Get.to(InputNilai(id: controller.listMahasiwa.value.data![index].mahasiswaId!,));
+                      Get.to(InputNilai(id: controller.listMahasiwa.value.data![index].frsMahasiswaId!,));
+                      
                     },
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 10),

@@ -93,6 +93,7 @@ class NilaiDosenServices {
       return DetailMahasiswaNilai.fromJson(jsonDecode(response.body));
     } else {
       print('Failed to update nilai: ${response.statusCode}');
+      print('Response body: ${response.body}');
       throw Exception('Failed to update nilai');
     }
   }

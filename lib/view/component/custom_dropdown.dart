@@ -17,7 +17,10 @@ class CustomDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       value: value,
-      
+      isExpanded: true,
+      style: TextStyle(
+        overflow: TextOverflow.ellipsis
+      ),
       decoration: InputDecoration(
         filled: true,
         fillColor: filledColor,

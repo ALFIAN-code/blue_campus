@@ -42,76 +42,81 @@ class _DetailKelasState extends State<DetailKelas> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'Daftar Mahasiswa',
-              style: TextStyle(
-                color: textColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await controller.getDetailKelasDosen(widget.idKelas);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ListView(
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'Daftar Mahasiswa',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            Text(
-              'kelas : ${widget.kelas}',
-              style: TextStyle(
-                color: textColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+              Text(
+                'kelas : ${widget.kelas}',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Obx(() {
-              if (controller.listMahasiswa.value.data == null) {
-                return Center(child: CircularProgressIndicator());
-              } else if (controller.listMahasiswa.value.data!.isEmpty) {
-                return Center(
-                  child: Text('Tidak ada mahasiswa dalam kelas ini'),
-                );
-              } else {
-                return Column(
-                  children:
-                      controller.listMahasiswa.value.data!.map((e) {
-                        return GestureDetector(
-                          onTap: () {
-                            print('tapped');
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => DetailFrs(
-                                      idMahasiswa: e.id ?? 0,
-                                      namaMahasiswa: e.nama ?? '-',
-                                      nrp: e.nrp ?? '',
-                                    ),
+              SizedBox(height: 10),
+              Obx(() {
+                if (controller.listMahasiswa.value.data == null) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (controller.listMahasiswa.value.data!.isEmpty) {
+                  return Center(
+                    child: Text('Tidak ada mahasiswa dalam kelas ini'),
+                  );
+                } else {
+                  return Column(
+                    children:
+                        controller.listMahasiswa.value.data!.map((e) {
+                          return GestureDetector(
+                            onTap: () {
+                              print('tapped');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => DetailFrs(
+                                        idMahasiswa: e.id ?? 0,
+                                        namaMahasiswa: e.nama ?? '-',
+                                        nrp: e.nrp ?? '',
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey.withAlpha(200),
+                                  width: 1,
+                                ),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey.withAlpha(200),
-                                width: 1,
+                              child: ListTile(
+                                title: Text('${e.nama}'),
+                                subtitle: Text('${e.nrp}'),
+                                trailing: Icon(Icons.arrow_forward_ios),
                               ),
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: ListTile(
-                              title: Text('${e.nama}'),
-                              subtitle: Text('${e.nrp}'),
-                              trailing: Icon(Icons.arrow_forward_ios),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                );
-              }
-            }),
-          ],
+                          );
+                        }).toList(),
+                  );
+                }
+              }),
+            ],
+          ),
         ),
       ),
     );

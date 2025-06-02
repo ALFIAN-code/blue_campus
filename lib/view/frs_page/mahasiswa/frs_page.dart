@@ -128,7 +128,7 @@ class _FrsRoleMahasiswaState extends State<FrsRoleMahasiswa> {
                 SizedBox(height: 20),
                 Obx((){
                   var filteredData = controllerFrsMahasiswa.filterFrsByJenisSemester(
-                    list: controllerFrsMahasiswa.frsTersedia.value.listFrs,
+                    list: controllerFrsMahasiswa.frsTersedia.value.data,
                     tahunAjaran: tahunAjaran,
                     jenisSemester: semester,
                   );
@@ -137,7 +137,7 @@ class _FrsRoleMahasiswaState extends State<FrsRoleMahasiswa> {
                     items:
                        filteredData.map(
                               (e) =>
-                                  '(${e.id}) ${e.kodeMatkul} ${e.mataKuliah}- ${e.semester} ',
+                                  '(${e.id}) ${e.kodeMatkul} ${e.mataKuliah}- smtr:${e.semester} ',
                             )
                             .toList(),
                     onChange: (value) {
@@ -177,11 +177,11 @@ class _FrsRoleMahasiswaState extends State<FrsRoleMahasiswa> {
                   children: [
                     Obx(() {
                       var filteredData = controllerFrsMahasiswa.filterFrsByJenisSemester(
-                        list: controllerFrsMahasiswa.frsDiambil.value.listFrs,
+                        list: controllerFrsMahasiswa.frsDiambil.value.data,
                         tahunAjaran: tahunAjaran,
                         jenisSemester: semester,
                       );
-                      return controllerFrsMahasiswa.frsDiambil.value.listFrs ==
+                      return controllerFrsMahasiswa.frsDiambil.value.data ==
                               null
                           ? Text('Tidak ada mata kuliah yang dipilih')
                           : ListView.separated(
@@ -228,30 +228,30 @@ class _FrsRoleMahasiswaState extends State<FrsRoleMahasiswa> {
                                     //     fontWeight: FontWeight.w400,
                                     //   ),
                                     // ),
-                                    // Text(
-                                    //   'Dosen: ${frs.}',
-                                    //   style: TextStyle(
-                                    //     fontSize: 14,
-                                    //     fontWeight: FontWeight.w400,
-                                    //   ),
-                                    // ),
-                                    // Text(
-                                    //   '${frs.hari} ${frs.jamMulai} - ${frs.jamSelesai}',
-                                    //   style: TextStyle(
-                                    //     fontSize: 14,
-                                    //     fontWeight: FontWeight.w400,
-                                    //   ),
-                                    // ),
-                                    // SizedBox(height: 5),
-                                    // Text(
-                                    //   'SKS: ${matakuliah.sks}',
-                                    //   style: TextStyle(
-                                    //     fontSize: 14,
-                                    //     fontWeight: FontWeight.w600,
-                                    //   ),
-                                    // ),
+                                    Text(
+                                      'Dosen: ${frs.dosen}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${frs.hari} ${frs.jamMulai} - ${frs.jamSelesai}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      'SKS: ${frs.sks}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                     SizedBox(
-                                      height: 5,
+                                      height: 10,
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
